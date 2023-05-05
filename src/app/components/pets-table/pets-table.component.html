@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Pets list</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+</head>
+
+<body class="bg-light">
+
+
+<div class="container">
+  <div class="py-5 text-center">
+    <h2>Pets</h2>
+  </div>
+
+  <div class="row">
+    <button (click)="toggleSortingSettings()" class="btn btn-secondary mb-3">Open sorting settings</button>
+  </div>
+  <div *ngIf="showSortingSettings" class="col-12 col-md-6 d-flex align-items-center">
+    <div class="form-inline">
+      <label for="sortField" class="mr-2">Sort by:</label>
+      <select class="custom-select mr-2" id="sortField" [(ngModel)]="toBeSortedBy">
+        <option value=""></option>
+        <option value="name">Name</option>
+        <option value="code">Code</option>
+      </select>
+
+      <label for="color" class="mr-2">Color:</label>
+      <select class="custom-select mr-2" id="color" [(ngModel)]="colorForSoring">
+        <option></option>
+        <option *ngFor="let color of furColors" [value]="color.name">{{ color.name }}</option>
+      </select>
+
+      <label for="type" class="mr-2">Type:</label>
+      <select class="custom-select mr-2" id="type" [(ngModel)]="typeForSorting">
+        <option></option>
+        <option *ngFor="let type of petTypes" [value]="type.name">{{ type.name }}</option>
+      </select>
+
+      <label for="origin" class="mr-2">Origin:</label>
+      <select class="custom-select mr-2" id="origin" [(ngModel)]="originForSorting">
+        <option></option>
+        <option *ngFor="let origin of origins" [value]="origin.name">{{ origin.name }}</option>
+      </select>
+
+      <button (click)="sortPets()" class="btn btn-success mb-2 mt-2">Sort</button>
+      <button (click)="showAllPets()" class="btn btn-info ml-2">Show all Pets</button>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <button [routerLink]="['/Pets', userId, 'addPet']" routerLinkActive="active" class="btn btn-primary">Add pet</button>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Code</th>
+        <th scope="col">Type</th>
+        <th scope="col">Fur color</th>
+        <th scope="col">Country</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let pet of pets; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ pet.name }}</td>
+        <td>{{ pet.code }}</td>
+        <td>{{ pet.petType  }}</td>
+        <td>{{ pet.furColor }}</td>
+        <td>{{ pet.origin }}</td>
+        <td>
+          <a [routerLink]="['/Pets', userId, 'editPet', pet.id]" routerLinkActive="active" class="btn btn-primary">Edit pet</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<footer class="my-5 pt-5 text-muted text-center text-small">
+  <p class="mb-1">&copy; 2022 Wisercat</p>
+</footer>
+</body>
+</html>

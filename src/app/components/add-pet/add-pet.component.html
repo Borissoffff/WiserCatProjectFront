@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Add a new pet</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+</head>
+
+<body class="bg-light">
+
+<div class="container">
+  <div class="py-5 text-center">
+    <h2 *ngIf="editingMode; else creationHeading">Update a pet</h2>
+    <ng-template #creationHeading>Add a pet</ng-template>
+    <h3>{{warningText}}</h3>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 order-md-1">
+      <form class="needs-validation">
+
+
+
+        <div class="mb-3">
+          <label>Name</label>
+          <div *ngIf="editingMode; else elseBlockForName" class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Name">
+          </div>
+          <ng-template #elseBlockForName>
+            <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Name">
+          </ng-template>
+        </div>
+
+        <div class="mb-3">
+          <label>Code</label>
+          <div *ngIf="editingMode; else elseBlockForCode" class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="code" name="id" placeholder="Code">
+          </div>
+          <ng-template #elseBlockForCode>
+            <input type="text" class="form-control" [(ngModel)]="code" name="id" placeholder="Code">
+          </ng-template>
+        </div>
+
+        <div class="mb-3">
+          <label for="types">Type</label>
+          <select class="custom-select d-block w-100" id="types" name="selectedType" [(ngModel)]="selectedType">
+            <option *ngFor="let type of petTypes" [value]="type.name">{{ type.name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="colors">Fur color</label>
+          <select class="custom-select d-block w-100" id="colors" name="selectedColor" [(ngModel)]="selectedColor">
+            <option value="">Choose...</option>
+            <option *ngFor="let color of furColors" [value]="color.name">{{ color.name }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="countries">Country of origin</label>
+          <select class="custom-select d-block w-100" id="countries" name="origin" [(ngModel)]="selectedOrigin">
+            <option value="">Choose...</option>
+            <option *ngFor="let origin of origins" [value]="origin.name">{{ origin.name }}</option>
+          </select>
+        </div>
+
+        <div *ngIf="editingMode; else elseButtonName">
+          <button (click)="savePet()" class="btn btn-primary btn-lg btn-block"
+                  type="submit">
+            Update Pet
+          </button>
+        </div>
+        <ng-template #elseButtonName>
+          <button (click)="savePet()" class="btn btn-primary btn-lg btn-block"
+                  type="submit">
+            Add Pet
+          </button>
+        </ng-template>
+
+      </form>
+    </div>
+  </div>
+
+  <footer class="my-5 pt-5 text-muted text-center text-small">
+    <p class="mb-1">&copy; 2022 Wisercat</p>
+  </footer>
+</div>
+</body>
+</html>
+
