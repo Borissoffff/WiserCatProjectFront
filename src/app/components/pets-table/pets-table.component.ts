@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PetDto} from "../../dto/PetDto";
 import {PetService} from "../../service/pet.service";
 import {HttpErrorResponse} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FurColor} from "../../dto/FurColor";
 import {Origin} from "../../dto/Origin";
 import {PetTypeService} from "../../service/pet-type.service";
@@ -39,6 +39,7 @@ export class PetsTableComponent implements OnInit {
     private originService: OriginService,
     private petService: PetService,
     private petsSorter: PetsSorter,
+    private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -55,17 +56,6 @@ export class PetsTableComponent implements OnInit {
 
   toggleSortingSettings() {
     this.showSortingSettings = !this.showSortingSettings;
-  }
-
-  public getPets(): void {
-    this.petService.getPets().subscribe({
-      next: (response: PetDto[]) => {
-        this.pets = response;
-      },
-      error: (error: HttpErrorResponse) => {
-        alert(error.message);
-      },
-    });
   }
 
   public getPetsByUserId(userId: number): void {
@@ -115,6 +105,10 @@ export class PetsTableComponent implements OnInit {
 
   public showAllPets() : void {
     this.getPetsByUserId(this.userId!);
+  }
+
+  public async logout(): Promise<void> {
+    await this.router.navigate([""]);
   }
 
   public sortPets(): void {

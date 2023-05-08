@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  public async onSubmit() : Promise<void> {
     if (this.username == undefined || this.password == undefined) {
       return;
     }

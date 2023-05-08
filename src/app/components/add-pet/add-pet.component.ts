@@ -123,7 +123,7 @@ export class AddPetComponent implements OnInit {
     })
   }
 
-  public savePet() {
+  public async savePet() : Promise<void> {
     // Validate input fields
     if (
       this.validator.validateStringInput(64, 1, this.name) &&

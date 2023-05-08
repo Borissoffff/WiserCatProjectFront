@@ -24,11 +24,13 @@
     <h2>Pets</h2>
   </div>
 
-  <div class="row">
+  <div class="row justify-content-between">
     <button (click)="toggleSortingSettings()" class="btn btn-secondary mb-3">Open sorting settings</button>
+    <button (click)="logout()" class="btn btn-danger mb-3">Log out</button>
   </div>
   <div *ngIf="showSortingSettings" class="col-12 col-md-6 d-flex align-items-center">
     <div class="form-inline">
+
       <label for="sortField" class="mr-2">Sort by:</label>
       <select class="custom-select mr-2" id="sortField" [(ngModel)]="toBeSortedBy">
         <option value=""></option>
