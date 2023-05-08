@@ -27,26 +27,72 @@
     <div class="col-md-12 order-md-1">
       <form class="needs-validation">
 
-
-
         <div class="mb-3">
           <label>Name</label>
-          <div *ngIf="editingMode; else elseBlockForName" class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Name">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              name="name"
+              placeholder="Name"
+              minlength="1"
+              maxlength="64" >
+          </div>
+          <!--<div *ngIf="editingMode; else elseBlockForName" class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              name="name"
+              placeholder="Name"
+              minlength="1"
+              maxlength="64">
           </div>
           <ng-template #elseBlockForName>
-            <input type="text" class="form-control" [(ngModel)]="name" name="name" placeholder="Name">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              name="name"
+              placeholder="Name"
+              minlength="1"
+              maxlength="64">
           </ng-template>
+        </div>-->
         </div>
-
         <div class="mb-3">
           <label>Code</label>
-          <div *ngIf="editingMode; else elseBlockForCode" class="input-group">
-            <input type="text" class="form-control" [(ngModel)]="code" name="id" placeholder="Code">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="code"
+              name="id"
+              placeholder="Code"
+              minlength="1"
+              maxlength="10">
+          </div>
+<!--          <div *ngIf="editingMode; else elseBlockForCode" class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="code"
+              name="id"
+              placeholder="Code"
+              minlength="1"
+              maxlength="10">
           </div>
           <ng-template #elseBlockForCode>
-            <input type="text" class="form-control" [(ngModel)]="code" name="id" placeholder="Code">
-          </ng-template>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="code"
+              name="id"
+              placeholder="Code"
+              minlength="1"
+              maxlength="10">
+          </ng-template>-->
         </div>
 
         <div class="mb-3">
@@ -73,14 +119,12 @@
         </div>
 
         <div *ngIf="editingMode; else elseButtonName">
-          <button (click)="savePet()" class="btn btn-primary btn-lg btn-block"
-                  type="submit">
+          <button (click)="savePet()" class="btn btn-primary btn-lg btn-block" type="submit">
             Update Pet
           </button>
         </div>
         <ng-template #elseButtonName>
-          <button (click)="savePet()" class="btn btn-primary btn-lg btn-block"
-                  type="submit">
+          <button (click)="savePet()" class="btn btn-primary btn-lg btn-block" type="submit">
             Add Pet
           </button>
         </ng-template>

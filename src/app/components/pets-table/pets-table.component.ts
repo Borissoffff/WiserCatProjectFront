@@ -10,6 +10,8 @@ import {FurColorService} from "../../service/fur-color.service";
 import {OriginService} from "../../service/origin.service";
 import {PetType} from "../../dto/PetType";
 import {PetsSorter} from "../../sorting/PetsSorter";
+import {UserDto} from "../../dto/UserDto";
+import {UserService} from "../../service/user.service";
 
 @Component({
   selector: 'app-pets-table',
@@ -21,6 +23,7 @@ export class PetsTableComponent implements OnInit {
   public pets: PetDto[] = [];
   private petsCopy: PetDto[] = [];
   public userId: number | undefined;
+  public user: UserDto | undefined;
 
   public petTypes: PetType[] = [];
   public furColors: FurColor[] = [];
@@ -38,6 +41,7 @@ export class PetsTableComponent implements OnInit {
     private furColorsService: FurColorService,
     private originService: OriginService,
     private petService: PetService,
+    private userService: UserService,
     private petsSorter: PetsSorter,
     private router: Router,
     private route: ActivatedRoute) {}
@@ -47,15 +51,27 @@ export class PetsTableComponent implements OnInit {
       const userId = params.get('userId');
       this.userId = Number(userId);
     });
+    this.getUser(this.userId!);
     this.getPetsByUserId(this.userId!);
-
     this.getFurColors();
     this.getPetTypes();
     this.getOrigins();
+    console.log(this.user);
   }
 
   toggleSortingSettings() {
     this.showSortingSettings = !this.showSortingSettings;
+  }
+
+  public getUser(userId: number): void {
+    this.userService.getUserById(userId).subscribe({
+      next: (response: UserDto) => {
+        this.user = response;
+      },
+      error: (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    });
   }
 
   public getPetsByUserId(userId: number): void {

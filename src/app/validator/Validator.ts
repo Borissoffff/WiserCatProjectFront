@@ -4,6 +4,8 @@ import {Origin} from "../dto/Origin";
 
 export class Validator {
 
+  private errors: string[] = [];
+
   validateStringInput(
     maxInputSize: number,
     minInputSize: number,
